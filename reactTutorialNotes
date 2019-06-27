@@ -1,0 +1,177 @@
+- one of the main queestions that must be asked is what is BABEL in a React app ?
+
+Babel is a : JavaScript compiler
+Babel is a toolchain that is mainly used to convert ECMAScript 2015+ code into a backwards
+compatible version of JavaScript in current and older browsers or environments. 
+Here are the main things Babel can do for you:
+*Transform syntax
+*Polyfill features that are missing in your target environment (through @babel/polyfill)
+*Source code transformations (codemods)
+
+- The directories/files that are in the package after we ran the react command are : 
+    1- src which contains all the source code we might need to make a web app using React.
+    2- Public which contains all the static files in the web app we are making.
+    3- node_modules.
+    4- package.json.
+    5- .gitignore for github purposes.
+
+- What is a component ?
+    Component : is a function or a class that producesa HTML to show to the user -Using JSX- , and handles feedback from the user -Using Event handlers- . 
+
+- What is JSX ?
+    JSX is a preprocessor step that adds XML syntax to JavaScript. You can definitely use React without JSX but JSX makes React a lot more elegant.
+
+Just like XML, JSX tags have a tag name, attributes, and children. 
+If an attribute value is enclosed in quotes, the value is a string. Otherwise, wrap the value in braces and the value is the enclosed JavaScript expression.
+
+- We use in the JSX code the keyword className for a specifying a class in a tag, so we use that so js wont see some conflict between the keyword class " class App extends React "
+and the class inside the tag that we use in CSS.
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Important topics :
+
+- Component Nesting : A Component can be shown inside of another.
+- Component Reuseablity : We want to make components that can be easily reused throughout the application.
+- Component Configuration : We should be able to configure a component when it is created.
+
+- PROPS stand for properties :
+    Props system is a system for passing data from a parent to a child component, the goal here is to customize or configure
+    a child component.
+
+There are two kinds of components
+    Class based components and functional based components so the main questions that lies here\
+    is when do we use functional based and when do we use class based ??
+
+    - -BASED ON STEPHAN GRIDER- the React community is not fully balanced on when do you use 
+      this or that yet the main idea here is that we use functions when we are doing something that is rather easy
+      to maintain with limited to none amount of logic and when you want to use some good amount of logic you must 
+      use Classes the same goes for other programming languages such as Java where functions do not work with everything
+      that we make a class so we define a class and call it as an object if we want to use it somehow.
+
+- So why classes can be better than functions in React.JS?
+
+- Classes are easier when it comes to organizing code!?!
+- Uses 'state' another react system.
+- Easier to handle user input.
+- Understands life cycle events.
+- Easier to do things when the app launches.
+
+- STATE :
+- Only useable with classs component.
+- Its a bit tricky and you might confuse props with state.
+- What is STATE -> Its a JS object that contains data relevant to a component.
+- Updating 'STATE' on a component causes the component to (almost) instantly rerender.
+- STATE must be initialized when a component is firstly created.
+- *IMPORTANT* State can Only be updated using function 'setState'.
+-------------------------
+Flow of the project :
+- JS file was loaded by the browser
+- Instance of App component is created
+- App components 'constructor' function is called
+- State object is created and assigned to the 'this.state' property
+- We call geolocation service
+- React calls the components render method
+- App return JSX and gets rerendered to page as HTML
+- We get the result of the geolocation
+- We update our state object with a call to 'this.state'
+- React sees that we updated the state of a component
+- React calls our 'render' method a second time
+- Render method returns some (updated) JSX
+Component  Lifesycle methods :
+- constructor
+- render --> this function only returns JSX thats its main goal
+- componentDidMount --> if we define a function inside our class this function will automatically be called one time when our component first gets rendered on the screen  
+- componentDidUpdate --> this function is called anytime the component gets updated automatically and after that the 'render()' will be called also
+- componentWillUnmount --> this function is used to not show the component it is used for clean up purposes
+--------------------------
+Section 7 starting with the pictures project :
+App Challenges:
+
+- Need to search term from the user.
+- Need to use that search term to make a request to an outside API and fetch the wanted data.
+- Need to take the fetched images and show them on the screen in a list .
+
+Note : In this project the file structure is important becuse it is conventional
+also we do not put the paranthesis when we pass the function in some event handlers such as inputs
+such as the onChange method we passed to the input tag in the JSX
+onChange prop is a special prop also there is onClick and onSubmit
+so these onChange, onClick and onSubmit so anytime the user clicks or changes or submit our callback function 
+will be invoked automatically. not all the tegs and elements have these attributes.
+Controlled vs Uncontrolled Elements :
+so what is the flow of this mini project until now ->
+    - User types in some input
+    - callback gets invoked
+    - We call setState with the new value
+    - Component rerenders
+    - *IMPORTANT* we take the this.state.term and we assign it to the prop 'value' inside the input tag.  
+
+to make the form not submit and refresh the whole page we will use the event.preventDefault() function
+what is 'this' used for in a class ?
+
+    - inside of any code we can call 'this' and it gives a reference to the class itself
+
+How the value of 'this' is determined in a function ?
+
+NOTE: the arrow function does bind() on its own the bind finction makes a new version of the function used .
+      The bind() method creates a new function that, when called, has its this keyword set to the provided value, with a given sequence of arguments preceding any provided when the new function is called.
+
+NOTE: Props always go down so in the pics app we are making, the parent component is App and the childrena re SearchBar and ImageList
+      so according to the props system , props can only be passed from App (Parent) to SearchBar (Child) or ImageList(Child).
+
+When we are using a prop in a class based component we put this.props so we can access it 
+
+To make some requests to the unsplash API we are going to use AJAX client to send and recieve data
+from the api firstly we will use :
+
+AXIOS : its a 3rd standalone party package can be downloaded using npm
+Fetch : its a singular function that is buil into most browser its lower lever to use data 
+
+so we are going to use AXIOS in this project cuz fetch is crappy 
+
+so there are two important keywords which are 'async' and 'await' 
+
+So, async ensures that the function returns a promise, and wraps non-promises in it.
+Simple enough, right? But not only that. There’s another keyword, await, that works only inside async functions, and it’s pretty cool.
+
+async function f() {
+
+  let promise = new Promise((resolve, reject) => {
+    setTimeout(() => resolve("done!"), 1000)
+  });
+
+  let result = await promise; // wait till the promise resolves (*)
+
+  alert(result); // "done!"
+}
+
+f();
+
+The function execution “pauses” at the line (*) and resumes when the promise settles, with result becoming its result. 
+So the code above shows “done!” in one second.
+
+*Map Statement :
+
+    The map() method creates a new array with the results of calling a function for every array element.
+
+    The map() method calls the provided function once for each element in an array, in order.
+    
+    Note: map() does not execute the function for array elements without values.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
